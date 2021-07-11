@@ -8,7 +8,7 @@
 
 
 char *ssid = "Home-corpnet";
-char *password = "4lambertfamilyonly!";
+char *password = "";
 
 ESP8266WebServer server(80);
 
