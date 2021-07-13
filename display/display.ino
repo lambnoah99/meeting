@@ -5,7 +5,7 @@
 #include <ESP8266mDNS.h>
 
 #define LED 4
-#define BTN 0
+#define BTN 2
 int btnCounter = 0;
 
 
@@ -64,11 +64,11 @@ void loop() {
     server.handleClient();
 
     // Short press released
-    if(btnCounter < 500 && btnCounter > 0 && digitalRead(BTN) == HIGH) {
+    if(btnCounter < 100 && btnCounter > 0 && digitalRead(BTN) == HIGH) {
       printIP();
       btnCounter = 0;
     }
-    if(btnCounter > 500) {
+    if(btnCounter > 100) {
       ESP.restart();
     }
 
@@ -78,6 +78,8 @@ void loop() {
     else if(digitalRead(BTN) == HIGH) {
       btnCounter = 0;
     }
+
+    delay(10);
 }
 
 void handleRoot() {
@@ -106,7 +108,7 @@ void handleReset() {
 }
 
 void handleNotFound() {
-  server.send(404, "text/plain", "Page not found");
+  server.send(404, "text/plain", "<h1>Page not found</h1>");
 }
 
 void printIP() {
@@ -122,6 +124,7 @@ void printIP() {
       digitalWrite(LED, HIGH);
       delay(500);
     }
+      delay(500);
       digitalWrite(LED, LOW);
       delay(2000);
       digitalWrite(LED, HIGH);
