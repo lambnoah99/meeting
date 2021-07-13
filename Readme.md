@@ -1,4 +1,17 @@
 # Meeting-Display
+## Anforderungen
+Funktional:
+        Anzeige über Lichtsignal
+        Einbindung ins Netzwerk
+        Über Webinterface steuerbar
+        IP-Adresse an Gerät selbst ablesbar
+
+Nicht-Funktional:
+        System sollte funktionieren
+        Konfiguration/Einbindung sollte ohne programmieren durchführbar sein
+        Der gesetzte Status sollte sich innerhalb von wenigen Sekunden aktualisieren (<2s)
+        Das Gerät sollte nicht zu groß sein (~Portmonaie)
+        Das Gerät sollte optisch ansprechend sein / nicht negativ auffallen
 
 ## API-Endpunkte
 
