@@ -1,4 +1,3 @@
-#include <EEPROM.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
@@ -9,8 +8,8 @@
 int btnCounter = 0;
 
 
-char *ssid = "Home-corpnet";
-char *password = "4lambertfamilyonly!";
+char *ssid = "SomeWiFiNetwork";
+char *password = "SecretPassword123";
 
 String state;
 
@@ -61,6 +60,7 @@ void setup() {
 }
 
 void loop() {
+  // Keep Server alive
     server.handleClient();
 
     // Short press released
@@ -68,13 +68,18 @@ void loop() {
       printIP();
       btnCounter = 0;
     }
+
+    // Long press
     if(btnCounter > 100) {
       ESP.restart();
     }
 
+    //Button pressed
     if(digitalRead(BTN) == LOW) {
       btnCounter++;
     }
+
+    // Button not pressed/released
     else if(digitalRead(BTN) == HIGH) {
       btnCounter = 0;
     }
@@ -112,12 +117,13 @@ void handleNotFound() {
 }
 
 void printIP() {
-  String ip = WiFi.localIP().toString();
-  ip = ip.substring(12);
+  String ip = WiFi.localIP().toString();            // Get IP
+  ip = ip.substring(12);                            // Extract the last block
 
   for(int i = 0; i < 3; i++) {
-    int currentSegment = int(ip.charAt(i)) - 48;
-    Serial.println(currentSegment);
+
+    int currentSegment = int(ip.charAt(i)) - 48;    // Remove 48 cause of UTF-8
+    
     for(int j = 0; j < currentSegment; j++) {
       digitalWrite(LED, LOW);
       delay(500);
